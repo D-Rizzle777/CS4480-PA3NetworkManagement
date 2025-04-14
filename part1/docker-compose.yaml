@@ -1,5 +1,6 @@
 services:
   r1:
+    container_name: r1
     build: 
       context: .
       dockerfile: Dockerfile-r1
@@ -17,6 +18,7 @@ services:
         ipv4_address: 10.0.1.1
 
   r2:
+    container_name: r2
     build: 
       context: .
       dockerfile: Dockerfile-r2
@@ -32,6 +34,7 @@ services:
         ipv4_address: 10.0.23.2
 
   r3:
+    container_name: r3
     build: 
       context: .
       dockerfile: Dockerfile-r3
@@ -49,6 +52,7 @@ services:
         ipv4_address: 10.0.3.1
 
   r4:
+    container_name: r4
     build: 
       context: .
       dockerfile: Dockerfile-r4
@@ -64,6 +68,7 @@ services:
         ipv4_address: 10.0.14.4
 
   ha:
+    container_name: ha
     build: 
       context: .
       dockerfile: Dockerfile-h
@@ -77,6 +82,7 @@ services:
         ipv4_address: 10.0.1.2
 
   hb:
+    container_name: hb
     build: 
       context: .
       dockerfile: Dockerfile-h
