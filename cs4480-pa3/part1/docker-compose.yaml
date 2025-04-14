@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile.host
     networks:
       net-ha-r1:
-        ipv4_address: 10.0.1.2
+        ipv4_address: 192.168.1.2
     cap_add:
       - NET_ADMIN
     stdin_open: true
@@ -21,11 +21,11 @@ services:
       dockerfile: Dockerfile.router
     networks:
       net-ha-r1:
-        ipv4_address: 10.0.1.1
+        ipv4_address: 192.168.1.1
       net-r1-r2:
-        ipv4_address: 10.0.12.1
+        ipv4_address: 192.168.12.1
       net-r1-r4:
-        ipv4_address: 10.0.14.1
+        ipv4_address: 192.168.14.1
     cap_add:
       - NET_ADMIN
     stdin_open: true
@@ -38,9 +38,9 @@ services:
       dockerfile: Dockerfile.router
     networks:
       net-r1-r2:
-        ipv4_address: 10.0.12.2
+        ipv4_address: 192.168.12.2
       net-r2-r3:
-        ipv4_address: 10.0.23.2
+        ipv4_address: 192.168.23.2
     cap_add:
       - NET_ADMIN
     stdin_open: true
@@ -53,11 +53,11 @@ services:
       dockerfile: Dockerfile.router
     networks:
       net-r2-r3:
-        ipv4_address: 10.0.23.3
+        ipv4_address: 192.168.23.3
       net-r3-r4:
-        ipv4_address: 10.0.34.3
+        ipv4_address: 192.168.34.3
       net-r3-hb:
-        ipv4_address: 10.0.3.1
+        ipv4_address: 192.168.3.1
     cap_add:
       - NET_ADMIN
     stdin_open: true
@@ -70,9 +70,9 @@ services:
       dockerfile: Dockerfile.router
     networks:
       net-r1-r4:
-        ipv4_address: 10.0.14.4
+        ipv4_address: 192.168.14.4
       net-r3-r4:
-        ipv4_address: 10.0.34.4
+        ipv4_address: 192.168.34.4
     cap_add:
       - NET_ADMIN
     stdin_open: true
@@ -85,7 +85,7 @@ services:
       dockerfile: Dockerfile.host
     networks:
       net-r3-hb:
-        ipv4_address: 10.0.3.2
+        ipv4_address: 192.168.3.2
     cap_add:
       - NET_ADMIN
     stdin_open: true
@@ -95,24 +95,24 @@ networks:
   net-ha-r1:
     ipam:
       config:
-        - subnet: 10.0.1.0/24
+        - subnet: 192.168.1.0/24
   net-r1-r2:
     ipam:
       config:
-        - subnet: 10.0.12.0/24
+        - subnet: 192.168.12.0/24
   net-r2-r3:
     ipam:
       config:
-        - subnet: 10.0.23.0/24
+        - subnet: 192.168.23.0/24
   net-r3-r4:
     ipam:
       config:
-        - subnet: 10.0.34.0/24
+        - subnet: 192.168.34.0/24
   net-r1-r4:
     ipam:
       config:
-        - subnet: 10.0.14.0/24
+        - subnet: 192.168.14.0/24
   net-r3-hb:
     ipam:
       config:
-        - subnet: 10.0.3.0/24
+        - subnet: 192.168.3.0/24
