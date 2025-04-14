@@ -27,8 +27,8 @@ done
 # Test connectivity from HostA to HostB
 echo "=== Testing Connectivity ==="
 echo "Ping from HostA to HostB:"
-docker exec -it ha ping -c 4 10.0.3.2
+docker exec -it ha ping -c 4 10.0.15.3
 
 # Show the path packets take (traceroute)
 echo "=== Traceroute from HostA to HostB ==="
-docker exec -it ha traceroute 10.0.3.2
+docker exec -it ha traceroute 10.0.15.3
