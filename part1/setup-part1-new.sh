@@ -25,4 +25,3 @@ echo "=== STEP 5: Testing Connectivity ==="
 
 echo ""
 echo "Setup complete! Network should now be fully operational."
-echo "You can now proceed with taking screenshots for your assignment submission."
