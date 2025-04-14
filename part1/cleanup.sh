@@ -19,4 +19,5 @@ sudo docker system prune -a -f --volumes
 # Restart Docker service
 sudo systemctl restart docker
 
+sleep 5
 echo "Docker environment cleaned up."
