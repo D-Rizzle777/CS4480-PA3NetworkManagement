@@ -74,11 +74,11 @@ def set_interface_cost(router, interface, cost):
     """Set OSPF cost for a specific interface on a router"""
     # Run each command separately
     cmds = [
-        f"docker exec -it {router} vtysh -c 'configure terminal'",
-        f"docker exec -it {router} vtysh -c 'interface {interface}'",
-        f"docker exec -it {router} vtysh -c 'ip ospf cost {cost}'",
-        f"docker exec -it {router} vtysh -c 'exit'",
-        f"docker exec -it {router} vtysh -c 'write memory'"
+        f"docker exec {router} vtysh -c 'configure terminal'",
+        f"docker exec {router} vtysh -c 'interface {interface}'",
+        f"docker exec {router} vtysh -c 'ip ospf cost {cost}'",
+        f"docker exec {router} vtysh -c 'exit'",
+        f"docker exec {router} vtysh -c 'write memory'"
     ]
     
     success = True
