@@ -2,11 +2,12 @@
 
 ## Setup Instructions
 
-1. Clone the repository:
+1. Clone the repository & set up Docker:
 
    ```
    git clone <repository-url>
    cd CS4480-PA3NetworkManagement
+   ./dockersetup
    ```
 
 2. Make the orchestrator and part one scripts executable:
@@ -37,7 +38,7 @@
      ./part2/Daniel_Wong_u1347597.py --toggle
      ```
 
-5. Test connectivity:
+5. Test connectivity(optional):
    ```
    ./part2/Daniel_Wong_u1347597.py --test
    ```
