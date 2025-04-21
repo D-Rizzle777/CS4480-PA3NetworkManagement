@@ -72,8 +72,21 @@ def configure_host_routes():
 
 def set_interface_cost(router, interface, cost):
     """Set OSPF cost for a specific interface on a router"""
-    cmd = f"docker exec -it {router} vtysh -c 'configure terminal' -c 'interface {interface}' -c 'ip ospf cost {cost}' -c 'exit' -c 'write memory'"
-    success, _ = run_command(cmd)
+    # Run each command separately
+    cmds = [
+        f"docker exec -i {router} vtysh -c 'configure terminal'",
+        f"docker exec -i {router} vtysh -c 'interface {interface}'",
+        f"docker exec -i {router} vtysh -c 'ip ospf cost {cost}'",
+        f"docker exec -i {router} vtysh -c 'exit'",
+        f"docker exec -i {router} vtysh -c 'write memory'"
+    ]
+    
+    success = True
+    for cmd in cmds:
+        cmd_success, _ = run_command(cmd, silent=True)
+        if not cmd_success:
+            success = False
+    
     return success
 
 def move_traffic_north():
