@@ -9,8 +9,11 @@ import sys
 def run_command(command, silent=False):
     """Execute a shell command and optionally print output"""
     try:
-        result = subprocess.run(command, shell=True, check=True, 
-                                text=True, capture_output=True)
+        if isinstance(command, list):
+            result = subprocess.run(command, check=True, text=True, capture_output=True)
+        else:
+            result = subprocess.run(command, shell=True, check=True, text=True, capture_output=True)
+            
         if not silent and result.stdout:
             print(result.stdout)
         return True, result.stdout
@@ -72,22 +75,24 @@ def configure_host_routes():
 
 def set_interface_cost(router, interface, cost):
     """Set OSPF cost for a specific interface on a router"""
-    # Run each command separately
-    cmds = [
-        f"docker exec {router} vtysh -c 'configure terminal'",
-        f"docker exec {router} vtysh -c 'interface {interface}'",
-        f"docker exec {router} vtysh -c 'ip ospf cost {cost}'",
-        f"docker exec {router} vtysh -c 'exit'",
-        f"docker exec {router} vtysh -c 'write memory'"
-    ]
-    
-    success = True
-    for cmd in cmds:
-        cmd_success, _ = run_command(cmd, silent=True)
-        if not cmd_success:
-            success = False
-    
-    return success
+    try:
+        # Use list format for subprocess to avoid shell parsing issues
+        cmd = [
+            "docker", "exec", router,
+            "vtysh", 
+            "-c", "configure terminal",
+            "-c", f"interface {interface}",
+            "-c", f"ip ospf cost {cost}",
+            "-c", "end",
+            "-c", "write memory"
+        ]
+        result = subprocess.run(cmd, check=True, capture_output=True, text=True)
+        print(f"Set cost {cost} on {router}:{interface}")
+        return True
+    except subprocess.CalledProcessError as e:
+        print(f"Error setting cost on {router}:{interface}: {e}")
+        print(f"Error message: {e.stderr if hasattr(e, 'stderr') else 'Unknown error'}")
+        return False
 
 def move_traffic_north():
     """Configure network to prefer the north path (R1-R2-R3)"""
